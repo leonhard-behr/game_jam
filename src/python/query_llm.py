@@ -3,9 +3,23 @@ import requests
 import time
 import json
 import os
+import hmac
+import hashlib
+import base64
 
 TAILSCALE_IP = "100.124.135.38"  # home pc IP
 CHAT_HISTORY_FILE = os.path.join(os.path.dirname(__file__), "chat_history.json")
+
+# Load the API key that must match the server
+API_KEY_PATH = os.path.join(os.path.dirname(__file__), "client_key.key")
+if not os.path.exists(API_KEY_PATH):
+    print("API key file not found. Please get the key from the server.")
+    API_KEY = input("Enter API key: ")
+    with open(API_KEY_PATH, 'w') as key_file:
+        key_file.write(API_KEY)
+else:
+    with open(API_KEY_PATH, 'r') as key_file:
+        API_KEY = key_file.read().strip()
 
 SYS_PROMPT = """
 You are in a roleplay scenario with the user.
@@ -37,6 +51,24 @@ def save_chat_history(chat_history):
     with open(CHAT_HISTORY_FILE, 'w') as f:
         json.dump(chat_history, f, indent=2)
 
+def generate_request_signature(request_data):
+    """Generate HMAC signature for request"""
+    # Create timestamp
+    timestamp = str(int(time.time()))
+    
+    # Convert request data to bytes for hashing
+    data = str(request_data).encode('utf-8')
+    message = data + timestamp.encode('utf-8')
+    
+    # Create signature
+    signature = hmac.new(
+        API_KEY.encode('utf-8'), 
+        message, 
+        hashlib.sha256
+    ).hexdigest()
+    
+    return timestamp, signature
+
 def api_call(user_message):
     """Make API call with current chat history and update history with response"""
     # Load current chat history
@@ -54,15 +86,33 @@ def api_call(user_message):
         else:
             prompt += f"\nAssistant: {msg['content']}"
     
+    # Prepare request data
+    request_data = {
+        "system_prompt": chat_history["system_prompt"],
+        "prompt": prompt,
+        "model": "llama3:8b",
+    }
+    
+    # Generate authentication signature
+    timestamp, signature = generate_request_signature(request_data)
+    
     # Make API call
     start = time.time()
     try:
-        response = requests.post(f"http://{TAILSCALE_IP}:5000/ask", json={
-            "system_prompt": chat_history["system_prompt"],
-            "prompt": prompt,
-            "model": "llama3:8b",
-        })
+        response = requests.post(
+            f"http://{TAILSCALE_IP}:5000/ask", 
+            json=request_data,
+            headers={
+                'X-Auth-Timestamp': timestamp,
+                'X-Auth-Signature': signature
+            }
+        )
         
+        if response.status_code != 200:
+            print(f"Error: Server returned status code {response.status_code}")
+            print(f"Response: {response.text}")
+            return None
+            
         response_text = response.json().get("response")
         if not response_text:
             print("Error: Received empty response from server")
@@ -83,8 +133,6 @@ def api_call(user_message):
 # Initialize chat history
 init_chat_history()
 
-
-
 # Interactive chat mode
 def chat_loop():
     print("Chat mode started. Type 'exit' to quit.")
@@ -97,5 +145,5 @@ def chat_loop():
         if response_text:
             print("\nAssistant:", response_text)
 
-# Uncomment to run interactive chat mode:
+# Run interactive chat mode
 chat_loop()
