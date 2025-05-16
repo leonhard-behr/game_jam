@@ -5,7 +5,8 @@ import json
 import os
 import hmac
 import hashlib
-import base64
+
+from prompt import SYSTEM_PROMPT
 
 TAILSCALE_IP = "100.124.135.38"  # home pc IP
 CHAT_HISTORY_FILE = os.path.join(os.path.dirname(__file__), "chat_history.json")
@@ -21,19 +22,11 @@ else:
     with open(API_KEY_PATH, 'r') as key_file:
         API_KEY = key_file.read().strip()
 
-SYS_PROMPT = """
-You are in a roleplay scenario with the user.
-You and the user are in a conversation. You both are in seperate cells. You do not see each other, you can only communicate through text.
-The user is human, you will act as a human too. The user will ask you questions and will find things in his cell.
-
-If the user asks you to do something, you will do it. You will give the user tips since you are longer in the cell than the user. 
-"""
-
 def init_chat_history():
     """Initialize chat history file if it doesn't exist"""
     if not os.path.exists(CHAT_HISTORY_FILE):
         chat_history = {
-            "system_prompt": SYS_PROMPT,
+            "system_prompt": SYSTEM_PROMPT,
             "history": []
         }
         save_chat_history(chat_history)
