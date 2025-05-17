@@ -1315,6 +1315,12 @@ MonoBehaviour:
   smoothSpeed: 0.125
   positionOffset: {x: 0, y: 0, z: -17}
   rotationAngles: {x: -5, y: 0, z: 0}
+  useBoundaries: 0
+  minX: -15
+  maxX: 8
+  minZ: -10
+  maxZ: 10
+  showDebugInfo: 0
 --- !u!1 &682608062
 GameObject:
   m_ObjectHideFlags: 0
