@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 // This class ensures there's only one EventSystem in the scene
 public class EventSystemManager : MonoBehaviour
