@@ -1,25 +1,10 @@
 fileFormatVersion: 2
-guid: efcd84fc57f45654c906cdd1c66fb59d
+guid: 1057c1545b397fd42941e5ca095fa8ae
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5006193454750513248
-    second: schallwelle_0
-  - first:
-      213: -6551955140275025780
-    second: schallwelle_1
-  - first:
-      213: 849848044608127394
-    second: schallwelle_2
-  - first:
-      213: 4568885750578247573
-    second: schallwelle_3
-  - first:
-      213: -8774559827468182965
-    second: schallwelle_4
-  - first:
-      213: 4325532032395007120
-    second: schallwelle_5
+      213: -2110747647752310832
+    second: Concrete2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -128,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: schallwelle_0
+      name: Concrete2_0
       rect:
         serializedVersion: 2
-        x: 194
-        y: 260
-        width: 150
-        height: 73
+        x: 0
+        y: 0
+        width: 1107
+        height: 751
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -143,118 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0683a435c62997540800000000000000
-      internalID: 5006193454750513248
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: schallwelle_1
-      rect:
-        serializedVersion: 2
-        x: 237
-        y: 326
-        width: 92
-        height: 60
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c88cc9f7387c215a0800000000000000
-      internalID: -6551955140275025780
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: schallwelle_2
-      rect:
-        serializedVersion: 2
-        x: 103
-        y: 98
-        width: 276
-        height: 186
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2a18deb3b444bcb00800000000000000
-      internalID: 849848044608127394
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: schallwelle_3
-      rect:
-        serializedVersion: 2
-        x: 116
-        y: 282
-        width: 14
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5977f861261f76f30800000000000000
-      internalID: 4568885750578247573
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: schallwelle_4
-      rect:
-        serializedVersion: 2
-        x: 126
-        y: 280
-        width: 9
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b4a985793508a3680800000000000000
-      internalID: -8774559827468182965
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: schallwelle_5
-      rect:
-        serializedVersion: 2
-        x: 154
-        y: 191
-        width: 195
-        height: 109
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0945a7f3770670c30800000000000000
-      internalID: 4325532032395007120
+      spriteID: 0df6b35923e15b2e0800000000000000
+      internalID: -2110747647752310832
       vertices: []
       indices: 
       edges: []
