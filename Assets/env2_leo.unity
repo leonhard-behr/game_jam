@@ -1294,7 +1294,7 @@ MonoBehaviour:
   interactionPrompt: Press E to interact
   highlightColor: {r: 1, g: 0.92, b: 0.016, a: 1}
   blinkSpeed: 4
-  letterContent: {fileID: 3645842592806284357, guid: 0fca65e90988b8344adcbd758bbf2dca, type: 3}
+  letterContent: {fileID: 1024731289513856459, guid: c2bc834aae9d9a34d9c1c7725382e00e, type: 3}
   displayScale: 0.8
   backgroundDim: {r: 0, g: 0, b: 0, a: 0.7}
 --- !u!1 &880941179
