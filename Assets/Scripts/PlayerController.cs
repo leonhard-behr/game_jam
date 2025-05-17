@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq; // Needed for LINQ methods like Any
 
 // Top-down 2D character controller using Unity's built-in Input system
 public class PlayerController : MonoBehaviour
@@ -100,6 +101,17 @@ public class PlayerController : MonoBehaviour
     
     private void FixedUpdate()
     {
+        // Get all input fields in the scene
+        bool isAnyInputFieldFocused = FindObjectsByType<TMPro.TMP_InputField>(FindObjectsSortMode.None)
+            .Any(field => field.isFocused);
+        
+        // Skip movement if input field is focused
+        if (isAnyInputFieldFocused)
+        {
+            rb.linearVelocity = Vector2.zero;
+            return;
+        }
+        
         // Handle top-down movement (both horizontal and vertical)
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
