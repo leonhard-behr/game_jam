@@ -19,6 +19,14 @@ public class llm_integration : MonoBehaviour
     private bool isProcessing = false;
     private string logFilePath;
     
+    private string[] conversationBuffers = new string[] 
+    {
+        "mhhh", "mh...", "mhhh...", "uhm", "hmmm", "huh", "uhm...", "huh...", 
+        "mhhh?", "mh?", "hmmm?", "huh?", "uhm?", "ähhm", "ahhm", "ahhm...", 
+        "ähm...", "mhmm", "mhmm...", "mhmm?", "mhmmm", "mhmmm...", "mhmmm?", "...", "...", "...", "....", ".....", "......", ".......", "........",
+        "hmmm", "hmmm...", "hmmm?", "hmmmm", "hmmmm...", "hmmmm?", "...", "...", "...", "....", ".....", "......", ".......", "........", ".........",
+    };
+
     void Start()
     {
         // Setup logging
@@ -92,6 +100,14 @@ public class llm_integration : MonoBehaviour
         string userMessage = userInputField.text;
         LogMessage($"Processing user message: {userMessage}");
         
+        // Immediately show a random thinking message
+        if (responseText != null)
+        {
+            string bufferText = GetRandomBufferText();
+            responseText.text = bufferText;
+            LogMessage($"Showing buffer text: {bufferText}");
+        }
+        
         StartCoroutine(QueryLLM(userMessage));
         
         // Clear input field after sending
@@ -130,14 +146,14 @@ public class llm_integration : MonoBehaviour
                     ResponseData responseData = JsonUtility.FromJson<ResponseData>(responseJson);
                     LogMessage($"Parsed response: {responseData.response}");
                     
-                    // Update UI text if available
+                    // Update UI text gradually
                     if (responseText != null)
                     {
-                        responseText.text = responseData.response;
-                        LogMessage("Response text UI updated");
+                        // Stop any previous display coroutines
+                        StopAllCoroutines();
                         
-                        // Force UI refresh
-                        Canvas.ForceUpdateCanvases();
+                        // Start displaying the response gradually
+                        StartCoroutine(DisplayResponseGradually(responseData.response));
                     }
                     else
                     {
@@ -159,6 +175,33 @@ public class llm_integration : MonoBehaviour
         
         isProcessing = false;
         LogMessage("API call completed");
+    }
+    
+    // Add this method to your llm_integration class
+    private IEnumerator DisplayResponseGradually(string fullResponse, float wordDelay = 0.1f)
+    {
+        if (responseText == null)
+        {
+            LogMessage("Cannot display response gradually - responseText is null", LogType.Warning);
+            yield break;
+        }
+        
+        // Split response into words
+        string[] words = fullResponse.Split(' ');
+        string currentText = "";
+        
+        // Display words one by one
+        for (int i = 0; i < words.Length; i++)
+        {
+            // Add the next word
+            currentText += words[i] + " ";
+            responseText.text = currentText;
+            
+            // Wait for the specified delay
+            yield return new WaitForSeconds(wordDelay);
+        }
+        
+        LogMessage("Completed displaying response gradually");
     }
     
     // Logging functions
@@ -192,6 +235,12 @@ public class llm_integration : MonoBehaviour
         {
             Debug.LogError($"Failed to write to log file: {e.Message}");
         }
+    }
+    
+    private string GetRandomBufferText()
+    {
+        int randomIndex = UnityEngine.Random.Range(0, conversationBuffers.Length);
+        return conversationBuffers[randomIndex];
     }
     
     // Classes for JSON serialization

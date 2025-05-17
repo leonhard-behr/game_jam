@@ -56,3 +56,4 @@ You will not answer the user questions if they are not related to the game. Alwa
 """
 
 
+# CONV_BUFFER = ["mhhh", "mh...", "mhhh...", "uhm", "hmmm", "huh", "uhm...", "huh...", "mhhh?", "mh?", "hmmm?", "huh?", "uhm?", "mhhh...", "mh...", "mhhh", "uhm", "hmmm", "huh", "uhm...", "huh...", "mhhh?", "mh?", "hmmm?", "huh?", "uhm?", "ähhm", "ahhm", "ahhm...", "ähm...", "mhmm", "mhmm...", "mhmm?", "mhmmm", "mhmmm...", "mhmmm?", "hmmm", "hmmm...", "hmmm?", "hmmmm", "hmmmm...", "hmmmm?", "uhm", "uhm...", "uhm?", "uhmm", "uhmm...", "uhmm?", "huh", "huh...", "huh?", "huhhh", "huhhh...", "huhhh?"]
