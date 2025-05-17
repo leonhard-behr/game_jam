@@ -8,12 +8,15 @@ public class MovableObject : InteractiveObject
     [SerializeField] private float carryDistance = 1.0f;
     [SerializeField] private float dropCooldown = 0.5f;
     [SerializeField] private LayerMask obstacleLayers; // Layers that block placement
+    [SerializeField] private bool maintainOrientation = true; // Whether to keep the object's original orientation
 
     private bool isBeingCarried = false;
     private Rigidbody2D objectRigidbody;
     private Collider2D objectCollider;
     private Vector3 originalPosition;
-    private Vector3 originalScale; // Store the original scale
+    private Vector3 originalScale;
+    private Quaternion originalRotation; // Store the original rotation
+    private Vector2 pickupDirection; // Direction relative to player when picked up
     private bool canDropObject = true;
     private float lastDropTime;
 
@@ -35,9 +38,10 @@ public class MovableObject : InteractiveObject
         // Store reference to collider
         objectCollider = GetComponent<Collider2D>();
         
-        // Store original position and scale
+        // Store original position, scale, and rotation
         originalPosition = transform.position;
         originalScale = transform.localScale;
+        originalRotation = transform.rotation;
         
         // Set interaction message
         interactionPrompt = "Press E to pick up";
@@ -84,6 +88,10 @@ public class MovableObject : InteractiveObject
         {
             isBeingCarried = true;
             
+            // Calculate pickup direction for later use
+            Vector2 toObject = transform.position - playerTransform.position;
+            pickupDirection = toObject.normalized;
+            
             // Update physics
             objectRigidbody.isKinematic = true;
             objectRigidbody.linearVelocity = Vector2.zero; // Reset any velocity
@@ -109,8 +117,18 @@ public class MovableObject : InteractiveObject
 
     private void DropObject()
     {
-        // Check if there's room to place the object
-        Vector2 dropPosition = CalculateDropPosition();
+        Vector2 dropPosition;
+        
+        if (maintainOrientation)
+        {
+            // Use the original pickup direction to determine drop position
+            dropPosition = (Vector2)playerTransform.position + pickupDirection * carryDistance;
+        }
+        else
+        {
+            // Use current facing direction to determine drop position
+            dropPosition = CalculateDropPosition();
+        }
         
         // Raycast to check if there's an obstacle at the drop position
         Collider2D obstacle = Physics2D.OverlapCircle(dropPosition, 0.5f, obstacleLayers);
@@ -124,6 +142,12 @@ public class MovableObject : InteractiveObject
             // Update physics
             objectRigidbody.isKinematic = false;
             objectRigidbody.linearVelocity = Vector2.zero; // Important: Reset velocity to prevent sliding
+            
+            // Restore original rotation if maintaining orientation
+            if (maintainOrientation)
+            {
+                transform.rotation = originalRotation;
+            }
             
             // Ensure scale is preserved
             transform.localScale = originalScale;
@@ -158,12 +182,23 @@ public class MovableObject : InteractiveObject
     {
         if (playerTransform != null)
         {
-            // Calculate direction player is facing
-            Vector2 playerInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
-            Vector2 carryDirection = playerInput.magnitude > 0.1f ? playerInput : Vector2.down;
+            Vector2 targetPosition;
             
-            // Set position in front of player
-            Vector2 targetPosition = (Vector2)playerTransform.position + carryDirection * carryDistance;
+            // Use the original direction when picked up
+            if (maintainOrientation)
+            {
+                targetPosition = (Vector2)playerTransform.position + pickupDirection * carryDistance;
+            }
+            // Otherwise use player's facing direction
+            else
+            {
+                // Calculate direction player is facing
+                Vector2 playerInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
+                Vector2 carryDirection = playerInput.magnitude > 0.1f ? playerInput : Vector2.down;
+                
+                // Set position in front of player
+                targetPosition = (Vector2)playerTransform.position + carryDirection * carryDistance;
+            }
             
             // Add height if needed (reduced/removed for top-down games)
             if (carryHeight > 0)
@@ -206,6 +241,7 @@ public class MovableObject : InteractiveObject
     {
         transform.position = originalPosition;
         transform.localScale = originalScale;
+        transform.rotation = originalRotation;
         isBeingCarried = false;
         objectRigidbody.isKinematic = false;
         objectRigidbody.linearVelocity = Vector2.zero;

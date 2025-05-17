@@ -154,7 +154,7 @@ MonoBehaviour:
   moveSpeed: 5
   interactionRadius: 2
   feetColliderHeight: 0.7
-  feetColliderWidth: 1.6
+  feetColliderWidth: 1.5
   feetColliderYOffset: -2.5
 --- !u!50 &224243064
 Rigidbody2D:
@@ -1428,13 +1428,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 928478447}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: 0.006705215, w: 0.9999775}
   m_LocalPosition: {x: 10.2, y: 5.82, z: 4.36}
   m_LocalScale: {x: 4.751478, y: 3.2759778, z: 3.2759778}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.768}
 --- !u!114 &928478451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1458,6 +1458,7 @@ MonoBehaviour:
   obstacleLayers:
     serializedVersion: 2
     m_Bits: 0
+  maintainOrientation: 1
 --- !u!1 &1027004235
 GameObject:
   m_ObjectHideFlags: 0
