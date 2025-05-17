@@ -752,7 +752,7 @@ GameObject:
   - component: {fileID: 289229469}
   - component: {fileID: 289229471}
   m_Layer: 0
-  m_Name: Weight_0
+  m_Name: Interactive_Weight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -847,7 +847,7 @@ MonoBehaviour:
   pickupDistance: 4
   carryHeight: 0.5
   carryDistance: 1
-  usePhysics: 1
+  usePhysics: 0
   objectType: Apple
   pickupSound: {fileID: 0}
   dropSound: {fileID: 0}
@@ -1985,8 +1985,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1150646986}
   - component: {fileID: 1150646985}
+  - component: {fileID: 1150646987}
   m_Layer: 0
-  m_Name: "Gl\xFChbirne_0"
+  m_Name: Interactive_Birne
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2062,6 +2063,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1150646987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1150646984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59c4a0766d2252941b71da10a4d5e3d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionRadius: 4
+  interactionPrompt: Press E to interact
+  highlightColor: {r: 1, g: 0.92, b: 0.016, a: 1}
+  blinkSpeed: 2
+  pickupDistance: 4
+  carryHeight: 0.5
+  carryDistance: 1
+  usePhysics: 0
+  objectType: Apple
+  pickupSound: {fileID: 0}
+  dropSound: {fileID: 0}
 --- !u!1 &1170526093
 GameObject:
   m_ObjectHideFlags: 0
@@ -2982,7 +3006,7 @@ MonoBehaviour:
   airParticles: {fileID: 0}
   ventAmbientSound: {fileID: 0}
   objectTravelingSound: {fileID: 0}
-  requiredObjectCount: 1
+  requiredObjectCount: 3
   unlockEffect: {fileID: 0}
   nextLevelName: 
   objectToActivate: {fileID: 0}
@@ -3569,8 +3593,10 @@ BoxCollider2D:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1150646986}
   - {fileID: 1323801813}
   - {fileID: 907475560}
+  - {fileID: 289229470}
   - {fileID: 2017403361}
   - {fileID: 1996432227}
   - {fileID: 115275084}
@@ -3595,9 +3621,7 @@ SceneRoots:
   - {fileID: 96352073}
   - {fileID: 916548797}
   - {fileID: 928050975}
-  - {fileID: 289229470}
   - {fileID: 1784545408}
   - {fileID: 1858380899}
   - {fileID: 33957313}
   - {fileID: 385724740}
-  - {fileID: 1150646986}
