@@ -172,7 +172,9 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      PaperCrumbled_scene_2_table_0: 1024731289513856459
+      PaperCrumbled_scene_2_table_1: -3580483031203220786
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
