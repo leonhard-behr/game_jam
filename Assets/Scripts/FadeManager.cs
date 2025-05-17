@@ -70,19 +70,44 @@ public class FadeManager : MonoBehaviour
     /// </summary>
     public void FadeAndLoadScene(string sceneName, string spawnPointName = "SpawnPoint")
     {
-        if (!isFading)
-        {
-            StartCoroutine(FadeAndLoadSceneCoroutine(sceneName, spawnPointName));
-        }
-        else
+        if (isFading)
         {
             Debug.LogWarning("Already fading, ignoring scene load request");
+            return;
         }
+        
+        // Stop any existing coroutines just to be safe
+        StopAllCoroutines();
+        
+        // Start the new transition
+        StartCoroutine(FadeAndLoadSceneCoroutine(sceneName, spawnPointName));
     }
     
     private IEnumerator FadeAndLoadSceneCoroutine(string sceneName, string spawnPointName)
     {
         isFading = true;
+        
+        // Check if we're already in the target scene
+        if (SceneManager.GetActiveScene().name == sceneName)
+        {
+            Debug.LogWarning($"Already in scene {sceneName}. Skipping scene load.");
+            
+            // Still fade out/in for visual consistency
+            fadeImage.canvasRenderer.SetAlpha(0f);
+            fadeImage.CrossFadeAlpha(1f, fadeDuration * 0.5f, true);
+            yield return new WaitForSeconds(fadeDuration * 0.5f);
+            fadeImage.CrossFadeAlpha(0f, fadeDuration * 0.5f, true);
+            
+            // Update spawn point anyway
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.targetSpawnPoint = spawnPointName;
+                GameManager.Instance.RepositionPlayerAtSpawnPoint();
+            }
+            
+            isFading = false;
+            yield break;
+        }
         
         // Store player data before transition
         if (GameManager.Instance != null)
@@ -101,7 +126,13 @@ public class FadeManager : MonoBehaviour
         
         // Load the scene
         Debug.Log($"Loading scene: {sceneName}");
-        SceneManager.LoadScene(sceneName);
+        Debug.Log($"Currently in scene: {SceneManager.GetActiveScene().name}");
+        
+        // Only load if we're not already in that scene
+        if (SceneManager.GetActiveScene().name != sceneName)
+        {
+            SceneManager.LoadScene(sceneName);
+        }
         
         // Wait a frame for the scene to load
         yield return null;

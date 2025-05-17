@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
     
     private Vector3 playerPosition;
     
+    // Add this field
+    private bool isFirstSceneLoaded = false;
+    
     private void Awake()
     {
         // Singleton pattern
@@ -19,6 +22,14 @@ public class GameManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
             SceneManager.sceneLoaded += OnSceneLoaded;
+            
+            // Ensure we're starting in the correct scene
+            // If the game is started from a scene that's not scene 0, load scene 0
+            if (SceneManager.GetActiveScene().buildIndex != 0 && !isFirstSceneLoaded)
+            {
+                isFirstSceneLoaded = true;
+                SceneManager.LoadScene(0);
+            }
         }
         else
         {
@@ -89,5 +100,31 @@ public class GameManager : MonoBehaviour
     private void OnDestroy()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    // Add this method to allow repositioning the player at any time
+    public void RepositionPlayerAtSpawnPoint()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player == null) return;
+        
+        GameObject spawnPoint = GameObject.Find(targetSpawnPoint);
+        if (spawnPoint == null)
+        {
+            foreach (SpawnPoint sp in FindObjectsByType<SpawnPoint>(FindObjectsSortMode.None))
+            {
+                if (sp.name.Equals(targetSpawnPoint, System.StringComparison.OrdinalIgnoreCase))
+                {
+                    spawnPoint = sp.gameObject;
+                    break;
+                }
+            }
+        }
+        
+        if (spawnPoint != null)
+        {
+            player.transform.position = spawnPoint.transform.position;
+            Debug.Log($"Repositioned player at spawn point: {spawnPoint.name}");
+        }
     }
 }
