@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      TealCarpet_0: -8852189083800472761
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

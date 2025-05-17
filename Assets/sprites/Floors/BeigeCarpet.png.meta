@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      BeigeCarpet_0: 8455287164304364763
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

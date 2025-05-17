@@ -272,7 +272,13 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      schallwelle_0: 5006193454750513248
+      schallwelle_1: -6551955140275025780
+      schallwelle_2: 849848044608127394
+      schallwelle_3: 4568885750578247573
+      schallwelle_4: -8774559827468182965
+      schallwelle_5: 4325532032395007120
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
