@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 using System.Text;
 using TMPro;
-using System.IO; // For file logging
+using System.IO;
 
 public class llm_integration : MonoBehaviour
 {
@@ -22,9 +22,9 @@ public class llm_integration : MonoBehaviour
     private string[] conversationBuffers = new string[] 
     {
         "mhhh", "mh...", "mhhh...", "uhm", "hmmm", "huh", "uhm...", "huh...", 
-        "mhhh?", "mh?", "hmmm?", "huh?", "uhm?", "ähhm", "ahhm", "ahhm...", 
-        "ähm...", "mhmm", "mhmm...", "mhmm?", "mhmmm", "mhmmm...", "mhmmm?", "...", "...", "...", "....", ".....", "......", ".......", "........",
-        "hmmm", "hmmm...", "hmmm?", "hmmmm", "hmmmm...", "hmmmm?", "...", "...", "...", "....", ".....", "......", ".......", "........", ".........",
+        "mhhh?", "mh?", "hmmm?", "huh?", "uhm?", "ähhm", "ahhm", "ahhm...", "...", "...", "...", "...", "...", "...", "...", "...", "...",
+        "ähm...", "mhmm", "mhmm...", "mhmm?", "mhmmm", "mhmmm...", "mhmmm?", "...", "...", "...", "...", "...", "...", "...", "...", "...",
+        "hmmm", "hmmm...", "hmmm?", "hmmmm", "hmmmm...", "hmmmm?", "...", "...", "...", "...", "...", "...", "...", "...", "...",
     };
 
     void Start()
@@ -90,8 +90,7 @@ public class llm_integration : MonoBehaviour
             LogMessage("Message processing already in progress, ignoring request");
             return;
         }
-        
-        if (string.IsNullOrEmpty(userInputField?.text))
+        if (string.IsNullOrEmpty(userInputField?.text) || userInputField.text.Trim().Length == 0)
         {
             LogMessage("Empty message, ignoring request");
             return;
@@ -185,6 +184,8 @@ public class llm_integration : MonoBehaviour
             LogMessage("Cannot display response gradually - responseText is null", LogType.Warning);
             yield break;
         }
+
+        //fullResponse = System.Text.RegularExpressions.Regex.Replace(fullResponse, @"[&%$§()/\*<>#@{}\[\]^°=+~|;:\.,-_]", "");
         
         // Split response into words
         string[] words = fullResponse.Split(' ');
