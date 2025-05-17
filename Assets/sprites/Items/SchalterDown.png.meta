@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: d8fa150051da825489527c3de98f312e
+guid: 3da3fbfb8d3a1de458972aec55812fcb
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4183208330383030991
-    second: Ball4_0
+      213: 358721934398171346
+    second: SchalterDown_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Ball4_0
+      name: SchalterDown_0
       rect:
         serializedVersion: 2
-        x: 9
-        y: 9
-        width: 27
-        height: 28
+        x: 25
+        y: 0
+        width: 101
+        height: 103
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1358016ef2242f5c0800000000000000
-      internalID: -4183208330383030991
+      spriteID: 2d8a1f0e2bf6af400800000000000000
+      internalID: 358721934398171346
       vertices: []
       indices: 
       edges: []
@@ -160,8 +160,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Ball4_0: -4183208330383030991
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
