@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 091d9d58b7416874b9b84baf1eee5467
+guid: 3b642af077db8dd4ca423a35ff01674d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6426852987416169821
-    second: "Gl\xFChbirne_0"
+      213: 972471702441998038
+    second: MagentaCarpet_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "Gl\xFChbirne_0"
+      name: MagentaCarpet_0
       rect:
         serializedVersion: 2
-        x: 41
-        y: 48
-        width: 191
-        height: 315
+        x: 0
+        y: 0
+        width: 1107
+        height: 754
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d5d499abdb4c03950800000000000000
-      internalID: 6426852987416169821
+      spriteID: 6d6bc2a6cd9ee7d00800000000000000
+      internalID: 972471702441998038
       vertices: []
       indices: 
       edges: []
