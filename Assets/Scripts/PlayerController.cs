@@ -127,7 +127,6 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (Mathf.Abs(moveDir.y) > 0.1f) // Vertical movement
                 {
-                    // IMPORTANT CHANGE: Use Idle animation for vertical movement
                     animator.Play("Idle");
                     
                     // No need to flip the sprite for vertical movement
