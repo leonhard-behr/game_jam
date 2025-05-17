@@ -8,7 +8,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float interactionRadius = 2f;
     
+    [Header("Collider Settings")]
+    [SerializeField] private float feetColliderHeight = 0.2f; // Height of feet collider
+    [SerializeField] private float feetColliderWidth = 0.5f;  // Width of feet collider
+    [SerializeField] private float feetColliderYOffset = -0.4f; // Y-offset from center
+    
     private Rigidbody2D rb;
+    private BoxCollider2D feetCollider;
     
     private void Start()
     {
@@ -22,17 +28,58 @@ public class PlayerController : MonoBehaviour
             rb.freezeRotation = true; // Keep the character upright
         }
         
-        // Ensure we have a collider
-        if (GetComponent<BoxCollider2D>() == null)
+        // Get or create feet collider
+        feetCollider = GetComponent<BoxCollider2D>();
+        if (feetCollider == null)
         {
-            gameObject.AddComponent<BoxCollider2D>();
+            feetCollider = gameObject.AddComponent<BoxCollider2D>();
         }
+        
+        // Adjust collider to only cover feet area
+        AdjustFeetCollider();
         
         // Make sure the player has the correct tag
         if (gameObject.tag != "Player")
         {
             gameObject.tag = "Player";
             Debug.Log("Set player tag to 'Player'");
+        }
+    }
+    
+    // Adjust the collider to only include the feet
+    private void AdjustFeetCollider()
+    {
+        if (feetCollider != null)
+        {
+            // Set size for feet-only collision
+            feetCollider.size = new Vector2(feetColliderWidth, feetColliderHeight);
+            
+            // Offset collider to be at the feet position
+            feetCollider.offset = new Vector2(0, feetColliderYOffset);
+            
+            Debug.Log($"Adjusted player collider to feet-only: Size={feetCollider.size}, Offset={feetCollider.offset}");
+        }
+    }
+    
+    // You can use this to visualize the collider in the editor
+    private void OnDrawGizmosSelected()
+    {
+        // Draw a wire cube representing the feet collider
+        Gizmos.color = Color.green;
+        BoxCollider2D col = GetComponent<BoxCollider2D>();
+        if (col != null)
+        {
+            Matrix4x4 oldMatrix = Gizmos.matrix;
+            Gizmos.matrix = transform.localToWorldMatrix;
+            Gizmos.DrawWireCube(col.offset, col.size);
+            Gizmos.matrix = oldMatrix;
+        }
+        else
+        {
+            // If no collider exists yet, use the configured values
+            Vector2 size = new Vector2(feetColliderWidth, feetColliderHeight);
+            Vector3 center = new Vector3(0, feetColliderYOffset, 0);
+            Gizmos.DrawWireCube(transform.position + center, size);
         }
     }
     
