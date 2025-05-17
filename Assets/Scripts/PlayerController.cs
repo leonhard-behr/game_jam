@@ -178,9 +178,6 @@ public class PlayerController : MonoBehaviour
             
             // IMPORTANT: Reset any scale modifications
             transform.localScale = new Vector3(1, 1, 1); // Reset to normal scale
-            
-            // Reset triggers if any
-            animator.ResetTrigger("Any trigger parameters you might have");
         }
     }
     
