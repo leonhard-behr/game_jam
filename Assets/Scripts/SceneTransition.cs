@@ -58,26 +58,33 @@ public class SceneTransition : MonoBehaviour
             return;
         }
         
-        // Store player data before transition
-        if (GameManager.Instance != null)
+        // Prepare spawnPointName
+        if (!string.IsNullOrEmpty(spawnPointName) && 
+            !spawnPointName.StartsWith("SpawnPoint_") && 
+            spawnPointName != "SpawnPoint")
         {
-            GameManager.Instance.SavePlayerState();
-            
-            // If spawnPointName doesn't have the prefix, add it
-            if (!string.IsNullOrEmpty(spawnPointName) && 
-                !spawnPointName.StartsWith("SpawnPoint_") && 
-                spawnPointName != "SpawnPoint")
-            {
-                spawnPointName = "SpawnPoint_" + spawnPointName;
-            }
-            
-            GameManager.Instance.targetSpawnPoint = spawnPointName;
-            Debug.Log($"Setting target spawn point to '{spawnPointName}' for scene '{targetSceneName}'");
+            spawnPointName = "SpawnPoint_" + spawnPointName;
         }
         
-        // Make sure we're loading the correct scene name, not the spawn point name
-        Debug.Log($"Loading scene: {targetSceneName}");
-        SceneManager.LoadScene(targetSceneName);
+        // Use FadeManager to handle transition with fade effect
+        if (FadeManager.Instance != null)
+        {
+            Debug.Log($"Using FadeManager to transition to {targetSceneName} with spawn point {spawnPointName}");
+            FadeManager.Instance.FadeAndLoadScene(targetSceneName, spawnPointName);
+        }
+        else
+        {
+            // Fallback to direct loading if FadeManager isn't available
+            Debug.LogWarning("FadeManager not found! Falling back to direct scene loading");
+            
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.SavePlayerState();
+                GameManager.Instance.targetSpawnPoint = spawnPointName;
+            }
+            
+            SceneManager.LoadScene(targetSceneName);
+        }
     }
     
     private void OnDrawGizmos()

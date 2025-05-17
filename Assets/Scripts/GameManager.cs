@@ -78,6 +78,12 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogWarning("Player not found in the loaded scene");
         }
+        
+        // Trigger a fade-in effect when a new scene loads
+        if (FadeManager.Instance != null)
+        {
+            FadeManager.Instance.FadeIn();
+        }
     }
     
     private void OnDestroy()
