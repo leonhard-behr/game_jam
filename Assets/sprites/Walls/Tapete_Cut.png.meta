@@ -181,6 +181,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -747,7 +760,32 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Tapete_Cut_0: 5555775779647766609
+      Tapete_Cut_1: 384725814649865236
+      Tapete_Cut_10: -3313956406462634670
+      Tapete_Cut_11: 2132314696928026284
+      Tapete_Cut_12: 2165084269719931352
+      Tapete_Cut_13: 7013050919921357730
+      Tapete_Cut_14: 1767149850006351440
+      Tapete_Cut_15: 2181727570829594421
+      Tapete_Cut_16: 5183390414026016848
+      Tapete_Cut_17: 1192838143396791160
+      Tapete_Cut_18: 5230255817141646388
+      Tapete_Cut_19: 7302364375713263358
+      Tapete_Cut_2: -7061431811792040902
+      Tapete_Cut_20: 7357495744678499422
+      Tapete_Cut_21: -4114600714531976923
+      Tapete_Cut_22: -1468310659664374490
+      Tapete_Cut_23: -1927826937068866510
+      Tapete_Cut_24: -6068205764641709793
+      Tapete_Cut_3: 2727514697886979938
+      Tapete_Cut_4: 7840815084365090634
+      Tapete_Cut_5: 4877030868467555818
+      Tapete_Cut_6: -4778008785342565848
+      Tapete_Cut_7: 150321466460173088
+      Tapete_Cut_8: 6315071737870054624
+      Tapete_Cut_9: 24360993324495208
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
