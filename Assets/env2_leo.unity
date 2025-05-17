@@ -1294,7 +1294,7 @@ MonoBehaviour:
   interactionPrompt: Press E to interact
   highlightColor: {r: 1, g: 0.92, b: 0.016, a: 1}
   blinkSpeed: 4
-  letterContent: {fileID: 5668723071718756358, guid: 0228e75e3ebf0dd4798fc7bd64ef6d6b, type: 3}
+  letterContent: {fileID: 3645842592806284357, guid: 0fca65e90988b8344adcbd758bbf2dca, type: 3}
   displayScale: 0.8
   backgroundDim: {r: 0, g: 0, b: 0, a: 0.7}
 --- !u!1 &880941179
@@ -3134,6 +3134,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2060212464}
   - component: {fileID: 2060212463}
+  - component: {fileID: 2060212465}
   m_Layer: 0
   m_Name: Paper1_0 (1)
   m_TagString: Untagged
@@ -3211,6 +3212,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2060212465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2060212462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db47c7023ce7d7f43a2c5a130f00427f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionRadius: 6
+  interactionPrompt: Press E to interact
+  highlightColor: {r: 1, g: 0.92, b: 0.016, a: 1}
+  blinkSpeed: 4
+  letterContent: {fileID: -1958680734336659375, guid: 15cd26609e62aef46baa462cf79caf58, type: 3}
+  displayScale: 0.8
+  backgroundDim: {r: 0, g: 0, b: 0, a: 0.7}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
