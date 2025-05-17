@@ -1,18 +1,22 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 // Top-down 2D character controller using Unity's built-in Input system
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement Settings")]
     [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float interactionRadius = 2f;
     
     private Rigidbody2D rb;
-      private void Start()
+    
+    private void Start()
     {
         // Get or add required components
         rb = GetComponent<Rigidbody2D>();
         if (rb == null)
-        {            rb = gameObject.AddComponent<Rigidbody2D>();
+        {            
+            rb = gameObject.AddComponent<Rigidbody2D>();
             rb.gravityScale = 0f; // No gravity for top-down view
             rb.linearDamping = 0.5f; // Add some damping for smoother movement
             rb.freezeRotation = true; // Keep the character upright
@@ -23,12 +27,24 @@ public class PlayerController : MonoBehaviour
         {
             gameObject.AddComponent<BoxCollider2D>();
         }
+        
+        // Make sure the player has the correct tag
+        if (gameObject.tag != "Player")
+        {
+            gameObject.tag = "Player";
+            Debug.Log("Set player tag to 'Player'");
+        }
     }
-      private void Update()
+    
+    private void Update()
     {
         // Movement is handled in FixedUpdate
         
-        // Interact with nearby objects when pressing E
+        // The InteractiveObject class handles the interaction already
+        // We don't need to implement additional logic here since
+        // each InteractiveObject checks for key press in its own Update method
+        
+        // This is just for debugging purposes
         if (Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log("Player pressed E to interact");
