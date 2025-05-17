@@ -5,6 +5,8 @@ import json
 import os
 import hmac
 import hashlib
+from flask import Flask, request, jsonify
+import threading
 
 from prompt import SYSTEM_PROMPT
 
@@ -30,6 +32,14 @@ def init_chat_history():
             "history": []
         }
         save_chat_history(chat_history)
+    else:
+        # clearing chat history for new session
+        with open(CHAT_HISTORY_FILE, 'w') as f:
+            chat_history = {
+                "system_prompt": SYSTEM_PROMPT,
+                "history": []
+            }
+            json.dump(chat_history, f, indent=2)
     return load_chat_history()
 
 def load_chat_history():
@@ -123,20 +133,45 @@ def api_call(user_message):
         print(f"Error making API call: {e}")
         return None
 
-# Initialize chat history
-init_chat_history()
+app = Flask(__name__)
 
-# Interactive chat mode
-def chat_loop():
-    print("Chat mode started. Type 'exit' to quit.")
-    while True:
-        user_input = input("\nYou: ")
-        if user_input.lower() == "exit":
-            break
-        
-        response_text = api_call(user_input)
-        if response_text:
-            print("\nAssistant:", response_text)
+@app.route('/query', methods=['POST'])
+def query_endpoint():
+    """REST endpoint for Unity to call"""
+    data = request.json
+    user_message = data.get('message', '')
+    if not user_message:
+        return jsonify({"error": "No message provided"}), 400
+    
+    # Call your existing function
+    response = api_call(user_message)
+    return jsonify({"response": response})
 
-# Run interactive chat mode
-chat_loop()
+def start_server():
+    """Start Flask server on a separate thread"""
+    app.run(host='127.0.0.1', port=5001, debug=False)
+
+if __name__ == "__main__":
+    # Initialize chat history
+    init_chat_history()
+    
+    # Start server in a separate thread
+    server_thread = threading.Thread(target=start_server)
+    server_thread.daemon = True
+    server_thread.start()
+    print("API server started on http://127.0.0.1:5001")
+
+    # Interactive chat mode (keep this as an option)
+    def chat_loop():
+        print("Chat mode started. Type 'exit' to quit.")
+        while True:
+            user_input = input("\nYou: ")
+            if user_input.lower() == "exit":
+                break
+            
+            response_text = api_call(user_input)
+            if response_text:
+                print("\nAssistant:", response_text)
+
+    # Run interactive chat mode
+    chat_loop()
