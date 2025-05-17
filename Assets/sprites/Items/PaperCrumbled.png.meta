@@ -112,6 +112,22 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+<<<<<<< HEAD
+=======
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+>>>>>>> 1a0b658846a2f4c7fda84009d564fe2be12f6448
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -172,9 +188,13 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
+<<<<<<< HEAD
     nameFileIdTable:
       PaperCrumbled_0: 3645842592806284357
       PaperCrumbled_1: 2468874381075752072
+=======
+    nameFileIdTable: {}
+>>>>>>> 1a0b658846a2f4c7fda84009d564fe2be12f6448
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
