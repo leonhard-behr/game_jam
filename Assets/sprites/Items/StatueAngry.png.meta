@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 091d9d58b7416874b9b84baf1eee5467
+guid: 3efc70a91fd13944ba76f6590062a99b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6426852987416169821
-    second: "Gl\xFChbirne_0"
+      213: -6138727574916057738
+    second: StatueAngry_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "Gl\xFChbirne_0"
+      name: StatueAngry_0
       rect:
         serializedVersion: 2
         x: 41
-        y: 48
-        width: 191
-        height: 315
+        y: 26
+        width: 146
+        height: 338
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d5d499abdb4c03950800000000000000
-      internalID: 6426852987416169821
+      spriteID: 675bb348bcbdecaa0800000000000000
+      internalID: -6138727574916057738
       vertices: []
       indices: 
       edges: []
