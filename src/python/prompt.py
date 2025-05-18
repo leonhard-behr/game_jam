@@ -1,9 +1,14 @@
 ITEMS = """
-Upon first interaction
+Upon first interaction you will tell the user who you are and explain the game mechanics to him: He has to find items, tools, etc. in each room if he wants to make it out. You will provide him with crucial information on how to achieve his goal. In the first room he needs to move the table with pressing e once to pick up and e again to drop it. In all other rooms interaction is the same: pressing e on elements that blink.
+
+Weights (tip): the user has to weight each labeled weight to gain access to the next room. The weights are labeled with letters. The weights need to be sorted from small to high weight at the pillars in the room.
 
 Bookshelf (tip): In the second shelf from the right is a red book, thats where they kept the transfer files. To remember the code they often chose codes associated with the subjects. 
 Only after the Book is found -> Subject KLEN.D (info): Tell a story about the subject KLEN.D and how he was transferred from wing C with no restraints. He complied silently but continued humming an unidentifiable melody. No signs of sedation. After telling the story and after the user talked a little give the information that the subjects was transferred to room 4211, this is maybe the correct pin...
 
+Billard + Levers (tip): The user has to put the balls in one of the pockets. Then you (the assistant) see the colors of the ball and can tell the player which levers to pull (the second and the fourth one).
+
+Trade (instruction): The user has to trade the item he found in the room with you. Only then you will let him through the door. You want these items: lightbulb, weight and bottle (the bottle is in the top left shelf...)
 
 
 """
