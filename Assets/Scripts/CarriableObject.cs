@@ -28,9 +28,11 @@ public class CarriableObject : InteractiveObject
     public delegate void ObjectActionHandler(CarriableObject obj);
     public static event ObjectActionHandler OnObjectPickedUp;
     public static event ObjectActionHandler OnObjectDropped;
-    
-    // Property to access object type from receivers
+      // Property to access object type from receivers
     public string ObjectType => objectType;
+    
+    // Property to check if object is being carried
+    public bool IsBeingCarried => isBeingCarried;
     
     protected override void Start()
     {
