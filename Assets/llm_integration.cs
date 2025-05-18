@@ -6,6 +6,8 @@ using UnityEngine.Networking;
 using System.Text;
 using TMPro;
 using System.IO;
+using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class llm_integration : MonoBehaviour
 {
@@ -75,6 +77,46 @@ public class llm_integration : MonoBehaviour
         }
         
         LogMessage("LLM Integration initialized");
+    }
+    
+    void OnEnable() {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable() {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+        // Find UI references in the new scene
+        if (userInputField == null)
+            userInputField = FindObjectsByType<TMP_InputField>(FindObjectsSortMode.None).FirstOrDefault();
+        
+        if (sendButton == null)
+            sendButton = FindObjectsByType<Button>(FindObjectsSortMode.None).FirstOrDefault();
+        
+        // Log all text elements to see what's available
+        var allTextElements = FindObjectsByType<TextMeshProUGUI>(FindObjectsSortMode.None);
+        LogMessage($"Found {allTextElements.Length} TextMeshProUGUI elements:");
+        foreach (var text in allTextElements) {
+            LogMessage($"Text element: {text.name}");
+        }
+        
+        if (responseText == null)
+            responseText = allTextElements.FirstOrDefault(text => text.name.Contains("Response"));
+                
+        // Reconnect event listeners
+        if (sendButton != null) {
+            sendButton.onClick.RemoveAllListeners();
+            sendButton.onClick.AddListener(SendMessage);
+        }
+        
+        if (userInputField != null) {
+            userInputField.onEndEdit.RemoveAllListeners();
+            userInputField.onEndEdit.AddListener(OnEndEdit);
+        }
+        
+        LogMessage("Scene changed - reconnected UI references");
     }
     
     private void OnEndEdit(string text)
