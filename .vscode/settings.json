@@ -56,5 +56,15 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "game_jam_project.sln"
+    "files.associations": {
+        "*.asset": "yaml",
+        "*.meta": "yaml",
+        "*.prefab": "yaml",
+        "*.unity": "yaml"
+    },
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.patterns": {
+        "*.sln": "*.csproj"
+    },
+    "dotnet.defaultSolution": "game_jam-1.sln"
 }
