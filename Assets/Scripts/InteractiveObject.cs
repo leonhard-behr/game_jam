@@ -6,18 +6,42 @@ public class InteractiveObject : MonoBehaviour
     [SerializeField] protected float interactionRadius = 2f;
     [SerializeField] protected string interactionPrompt = "Press E to interact";
     [SerializeField] protected Color highlightColor = new Color(1f, 0.92f, 0.016f, 1f); // Yellow highlight
+    [SerializeField] protected float blinkSpeed = 2f; // Blinks per second
     
     protected Color originalColor;
     protected Renderer objectRenderer;
+    protected SpriteRenderer spriteRenderer;
     protected bool playerInRange = false;
+    protected float blinkTimer = 0f;
+    protected Transform playerTransform;
     
     protected virtual void Start()
     {
-        // Get the renderer component
+        // Find the player
+        playerTransform = GameObject.FindGameObjectWithTag("Player")?.transform;
+        if (playerTransform == null)
+        {
+            Debug.LogWarning("Player not found! Make sure player has 'Player' tag.");
+        }
+        
+        // Get the renderer component (for 3D objects)
         objectRenderer = GetComponent<Renderer>();
+        
+        // Get sprite renderer (for 2D objects)
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer == null)
+        {
+            spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        }
+        
+        // Store original color
         if (objectRenderer != null)
         {
             originalColor = objectRenderer.material.color;
+        }
+        else if (spriteRenderer != null) 
+        {
+            originalColor = spriteRenderer.color;
         }
         else
         {
@@ -34,41 +58,70 @@ public class InteractiveObject : MonoBehaviour
     
     protected virtual void Update()
     {
-        // Check if player is in range
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
-        {
-            float distanceToPlayer = Vector2.Distance(player.transform.position, transform.position);
-            bool wasInRange = playerInRange;
-            playerInRange = distanceToPlayer <= interactionRadius;
+        if (playerTransform == null)
+            return;
             
-            // Highlight object if player is in range
-            if (objectRenderer != null)
+        // Check if player is in range
+        float distanceToPlayer = Vector2.Distance(playerTransform.position, transform.position);
+        bool wasInRange = playerInRange;
+        playerInRange = distanceToPlayer <= interactionRadius;
+        
+        // State change detection
+        if (wasInRange != playerInRange)
+        {
+            if (!playerInRange)
             {
-                objectRenderer.material.color = playerInRange ? highlightColor : originalColor;
+                // Reset color when player leaves range
+                ResetObjectColor();
             }
             
             // Show or hide interaction prompt
-            if (playerInRange && !wasInRange)
+            if (playerInRange && UIPromptController.Instance != null)
             {
-                if (UIPromptController.Instance != null)
-                {
-                    UIPromptController.Instance.ShowPrompt(interactionPrompt);
-                }
+                UIPromptController.Instance.ShowPrompt(interactionPrompt);
             }
-            else if (!playerInRange && wasInRange)
+            else if (!playerInRange && UIPromptController.Instance != null)
             {
-                if (UIPromptController.Instance != null)
-                {
-                    UIPromptController.Instance.HidePrompt();
-                }
+                UIPromptController.Instance.HidePrompt();
+            }
+        }
+        
+        // Handle highlighting/blinking effect
+        if (playerInRange)
+        {
+            blinkTimer += Time.deltaTime * blinkSpeed;
+            
+            // Create pulsing effect using sine wave
+            float pulseAmount = Mathf.Sin(blinkTimer * Mathf.PI) * 0.5f + 0.5f;
+            
+            // Apply color effect based on available renderer
+            if (objectRenderer != null)
+            {
+                objectRenderer.material.color = Color.Lerp(originalColor, highlightColor, pulseAmount);
+            }
+            else if (spriteRenderer != null)
+            {
+                spriteRenderer.color = Color.Lerp(originalColor, highlightColor, pulseAmount);
             }
             
             // Check for interaction input
-            if (playerInRange && Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E))
             {
                 Interact();
             }
+        }
+    }
+    
+    // Reset object color based on available renderer
+    protected void ResetObjectColor()
+    {
+        if (objectRenderer != null)
+        {
+            objectRenderer.material.color = originalColor;
+        }
+        else if (spriteRenderer != null)
+        {
+            spriteRenderer.color = originalColor;
         }
     }
     
