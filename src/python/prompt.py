@@ -1,7 +1,8 @@
 ITEMS = """
 
+
 Bookshelf (tip): In the second shelf from the right is a red book, thats where they kept the transfer files. To remember the code they often chose codes associated with the subjects. 
-Only after the Book is found -> Subject KLEN.D (info): Tell a story about the subject KLEN.D and how he was transferred from wing C with no restraints. He complied silently but continued humming an unidentifiable melody. No signs of sedation. After telling the story and after the user talked a little give the information that the subjects was transferred to room 4211.
+Only after the Book is found -> Subject KLEN.D (info): Tell a story about the subject KLEN.D and how he was transferred from wing C with no restraints. He complied silently but continued humming an unidentifiable melody. No signs of sedation. After telling the story and after the user talked a little give the information that the subjects was transferred to room 4211, this is maybe the correct pin...
 
 
 

@@ -208,7 +208,7 @@ public class NumpadDoor : InteractiveObject
         
         codeDisplayText = codeText.AddComponent<TextMeshProUGUI>();
         codeDisplayText.alignment = TextAlignmentOptions.Center;
-        codeDisplayText.fontSize = 36;
+        codeDisplayText.fontSize = 48; // INCREASED from 36 to 48
         codeDisplayText.color = codeFontColor;
         codeDisplayText.text = "____";
         
@@ -242,10 +242,10 @@ public class NumpadDoor : InteractiveObject
             statusDisplayText.font = statusFont;
         }
         
-        // Position the status text
+        // Position the status text HIGHER UP
         RectTransform statusRect = statusDisplay.GetComponent<RectTransform>();
-        statusRect.anchorMin = new Vector2(0.1f, 0.7f);
-        statusRect.anchorMax = new Vector2(0.9f, 0.78f);
+        statusRect.anchorMin = new Vector2(0.1f, 0.9f); // Changed from 0.7f to 0.9f
+        statusRect.anchorMax = new Vector2(0.9f, 0.98f); // Changed from 0.78f to 0.98f
         statusRect.offsetMin = Vector2.zero;
         statusRect.offsetMax = Vector2.zero;
         
@@ -277,13 +277,15 @@ public class NumpadDoor : InteractiveObject
         codeDisplayText.text = displayText;
     }
     
+    // Modify the CheckCode method to directly trigger the scene transition
+
     private void CheckCode()
     {
         if (currentCode == correctCode)
         {
             // Code is correct
             statusDisplayText.text = accessGrantedMessage;
-            statusDisplayText.color = Color.green;
+            statusDisplayText.color = Color.white;
             
             // Play correct code sound
             if (audioSource != null && correctCodeSound != null)
@@ -298,8 +300,10 @@ public class NumpadDoor : InteractiveObject
                 doorBlocker.enabled = false;
             }
             
-            // Automatically close numpad after a delay
-            Invoke("CloseNumpadDisplay", 1.5f);
+            Debug.Log("Door unlocked, triggering scene transition in 1.5 seconds");
+            
+            // Automatically transition after a short delay
+            Invoke("TriggerSceneTransition", 1.5f);
             
             // Update the interaction prompt
             interactionPrompt = "Press E to open door";
@@ -308,7 +312,7 @@ public class NumpadDoor : InteractiveObject
         {
             // Code is incorrect
             statusDisplayText.text = accessDeniedMessage;
-            statusDisplayText.color = Color.red;
+            statusDisplayText.color = Color.white;
             
             // Play incorrect code sound
             if (audioSource != null && incorrectCodeSound != null)
@@ -318,6 +322,53 @@ public class NumpadDoor : InteractiveObject
             
             // Clear the code after a short delay
             Invoke("ClearCode", 1.0f);
+        }
+    }
+
+    // Add this new method to handle the automatic transition
+    private void TriggerSceneTransition()
+    {
+        // Close the numpad first
+        CloseNumpadDisplay();
+        
+        // Check if the transition reference exists
+        if (connectedTransition != null)
+        {
+            Debug.Log("Triggering scene transition");
+            
+            // Try multiple ways to trigger the transition
+            // Method 1: Direct call if available
+            if (connectedTransition.GetType().GetMethod("TransitionToScene") != null)
+            {
+                connectedTransition.SendMessage("TransitionToScene", SendMessageOptions.DontRequireReceiver);
+            }
+            // Method 2: Use SendMessage with named parameter if needed
+            else if (connectedTransition.GetType().GetMethod("TransitionToScene", new System.Type[] { typeof(string) }) != null)
+            {
+                string sceneName = connectedTransition.GetType().GetField("targetSceneName")?.GetValue(connectedTransition) as string;
+                if (!string.IsNullOrEmpty(sceneName))
+                {
+                    connectedTransition.SendMessage("TransitionToScene", sceneName, SendMessageOptions.DontRequireReceiver);
+                }
+            }
+            // Method 3: Direct scene loading as fallback
+            else
+            {
+                string sceneName = connectedTransition.GetType().GetField("targetSceneName")?.GetValue(connectedTransition) as string;
+                if (!string.IsNullOrEmpty(sceneName))
+                {
+                    Debug.Log($"Loading scene directly: {sceneName}");
+                    UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+                }
+                else
+                {
+                    Debug.LogError("Could not determine target scene name for transition");
+                }
+            }
+        }
+        else
+        {
+            Debug.LogError("No scene transition component found - cannot transition to next scene");
         }
     }
     

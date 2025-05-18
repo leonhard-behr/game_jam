@@ -4561,6 +4561,10 @@ MonoBehaviour:
   keyPressSound: {fileID: 0}
   correctCodeSound: {fileID: 0}
   incorrectCodeSound: {fileID: 0}
+  codeFont: {fileID: 11400000, guid: 1e7e94e7f79d55c429c31a25d5053aa5, type: 2}
+  statusFont: {fileID: 11400000, guid: 1e7e94e7f79d55c429c31a25d5053aa5, type: 2}
+  codeFontColor: {r: 1, g: 1, b: 1, a: 1}
+  statusFontColor: {r: 1, g: 1, b: 1, a: 1}
   connectedTransition: {fileID: 1685322897}
   accessDeniedMessage: ACCESS DENIED
   accessGrantedMessage: ACCESS GRANTED
