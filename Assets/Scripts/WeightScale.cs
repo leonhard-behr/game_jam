@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 /// <summary>
 /// A script that detects objects placed on a platform and displays their weight value.
@@ -8,13 +8,17 @@ using UnityEngine.UI;
 public class WeightScale : MonoBehaviour
 {
     [Header("Scale Settings")]
-    [SerializeField] private Text weightDisplay; // UI Text component to display the weight
+    [SerializeField] private TMP_Text weightDisplay; // TextMeshPro component to display the weight
     [SerializeField] private string defaultText = "0"; // Text to show when nothing is on the scale
+    [SerializeField] private bool hideWhenEmpty = true; // Hide the text when nothing is on the scale
+    
+    [Header("Font Settings")]
+    [SerializeField] private TMP_FontAsset customFont; // Custom font to use for the weight display
+    [SerializeField] private bool useCustomFont = false; // Whether to use the custom font
     
     // Reference to the object platform this script is attached to
     private ObjectPlatform platform;
-    
-    private void Awake()
+      private void Awake()
     {
         // Get the ObjectPlatform component
         platform = GetComponent<ObjectPlatform>();
@@ -25,6 +29,22 @@ public class WeightScale : MonoBehaviour
             return;
         }
         
+        // Try to find the weight_watcher TMP component if not assigned
+        if (weightDisplay == null)
+        {
+            weightDisplay = GameObject.Find("weight_watcher")?.GetComponent<TMP_Text>();
+            if (weightDisplay == null)
+            {
+                Debug.LogWarning("Weight display (weight_watcher) not found. Weight will not be displayed.");
+            }
+        }
+        
+        // Apply custom font if specified
+        if (useCustomFont && customFont != null && weightDisplay != null)
+        {
+            weightDisplay.font = customFont;
+        }
+        
         // Initialize display
         UpdateWeightDisplay();
     }
@@ -33,8 +53,7 @@ public class WeightScale : MonoBehaviour
     {
         UpdateWeightDisplay();
     }
-    
-    /// <summary>
+      /// <summary>
     /// Updates the weight display based on the current object on the platform
     /// </summary>
     private void UpdateWeightDisplay()
@@ -48,9 +67,20 @@ public class WeightScale : MonoBehaviour
         if (obj == null)
         {
             // No object on the scale
-            weightDisplay.text = defaultText;
+            if (hideWhenEmpty)
+            {
+                weightDisplay.gameObject.SetActive(false);
+            }
+            else
+            {
+                weightDisplay.gameObject.SetActive(true);
+                weightDisplay.text = defaultText;
+            }
             return;
         }
+        
+        // Make sure the display is active when we have an object
+        weightDisplay.gameObject.SetActive(true);
         
         // Get the name of the object
         string objName = obj.name;
