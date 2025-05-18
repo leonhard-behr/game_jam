@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 8ec79c3e9d37e1045806b77c13d37ca7
+guid: 07d4495610b54474d8c8ef0c1b501460
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5861101082079504100
-    second: "WallSpr\xFCh_0"
+      213: 2879941030592281543
+    second: Random11_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "WallSpr\xFCh_0"
+      name: Random11_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1394
-        height: 943
+        x: 14
+        y: 21
+        width: 99
+        height: 74
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4e6a1067160d65150800000000000000
-      internalID: 5861101082079504100
+      spriteID: 7cb7686db1b97f720800000000000000
+      internalID: 2879941030592281543
       vertices: []
       indices: 
       edges: []
@@ -147,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      "WallSpr\xFCh_0": 5861101082079504100
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
