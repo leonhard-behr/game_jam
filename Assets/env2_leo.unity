@@ -693,7 +693,7 @@ Transform:
   m_GameObject: {fileID: 229611065}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 75.5, y: -37.4, z: 4.58}
+  m_LocalPosition: {x: 77.91, y: -11.66, z: 4.58}
   m_LocalScale: {x: 0.58095443, y: 0.58095443, z: 0.58095443}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1154,6 +1154,7 @@ GameObject:
   m_Component:
   - component: {fileID: 635417163}
   - component: {fileID: 635417162}
+  - component: {fileID: 635417164}
   m_Layer: 0
   m_Name: Weight_A_0
   m_TagString: Untagged
@@ -1231,6 +1232,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &635417164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 635417161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59c4a0766d2252941b71da10a4d5e3d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionRadius: 4
+  interactionPrompt: Press E to interact
+  highlightColor: {r: 1, g: 0.92, b: 0.016, a: 1}
+  blinkSpeed: 2
+  pickupDistance: 4
+  carryHeight: 0.5
+  carryDistance: 1
+  usePhysics: 0
+  objectType: Apple
+  pickupSound: {fileID: 0}
+  dropSound: {fileID: 0}
 --- !u!1 &647575154
 GameObject:
   m_ObjectHideFlags: 0
@@ -1479,6 +1503,7 @@ GameObject:
   m_Component:
   - component: {fileID: 702089544}
   - component: {fileID: 702089543}
+  - component: {fileID: 702089545}
   m_Layer: 0
   m_Name: Weight_B_0
   m_TagString: Untagged
@@ -1556,6 +1581,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &702089545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 702089542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59c4a0766d2252941b71da10a4d5e3d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionRadius: 4
+  interactionPrompt: Press E to interact
+  highlightColor: {r: 1, g: 0.92, b: 0.016, a: 1}
+  blinkSpeed: 2
+  pickupDistance: 4
+  carryHeight: 0.5
+  carryDistance: 1
+  usePhysics: 0
+  objectType: Apple
+  pickupSound: {fileID: 0}
+  dropSound: {fileID: 0}
 --- !u!1 &777489338
 GameObject:
   m_ObjectHideFlags: 0
@@ -3490,6 +3538,9 @@ GameObject:
   - component: {fileID: 1590071413}
   - component: {fileID: 1590071412}
   - component: {fileID: 1590071411}
+  - component: {fileID: 1590071414}
+  - component: {fileID: 1590071415}
+  - component: {fileID: 1590071416}
   m_Layer: 0
   m_Name: Waage_0
   m_TagString: Untagged
@@ -3504,7 +3555,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1590071410}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -3531,7 +3582,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.77415574}
+  m_Offset: {x: 0, y: -0.80757403}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -3541,7 +3592,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.2, y: 1.2416885}
+  m_Size: {x: 1.2, y: 1.1748519}
   m_EdgeRadius: 0
 --- !u!212 &1590071412
 SpriteRenderer:
@@ -3613,6 +3664,96 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1590071414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1590071410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4439d7f8dbc805f44be512893efc6ca3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  platformName: Object Platform
+  interactionRadius: 4
+  objectPlacementOffset: {x: 0, y: 0.5, z: 0}
+  highlightColor: {r: 0.5, g: 0.8, b: 1, a: 1}
+  acceptedObjectTypes: []
+  placementSound: {fileID: 0}
+  removingSound: {fileID: 0}
+--- !u!61 &1590071415
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1590071410}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.2, y: 2.79}
+    newSize: {x: 1.2, y: 2.79}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1.2, y: 2.79}
+  m_EdgeRadius: 0
+--- !u!114 &1590071416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1590071410}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e24eb2260d88c5469da3989d170864b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  platformName: Object Platform
+  interactionRadius: 2
+  objectPlacementOffset: {x: 0, y: 0.5, z: 0}
+  highlightColor: {r: 0.5, g: 0.8, b: 1, a: 1}
+  acceptedObjectTypes: []
+  placementSound: {fileID: 0}
+  removingSound: {fileID: 0}
+  rotateObject: 1
+  rotationSpeed: 30
+  floatObject: 1
+  floatHeight: 0.2
+  floatSpeed: 1
+  lightEffect: {fileID: 0}
 --- !u!1 &1616872094
 GameObject:
   m_ObjectHideFlags: 0
