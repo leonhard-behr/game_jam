@@ -64,7 +64,7 @@ public class SceneTransition : MonoBehaviour
         }
     }
     
-    private void TransitionToScene()
+    public void TransitionToScene() // Changed from private to public
     {
         // Prevent multiple transitions
         if (hasTriggeredTransition) return;

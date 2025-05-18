@@ -334,37 +334,10 @@ public class NumpadDoor : InteractiveObject
         // Check if the transition reference exists
         if (connectedTransition != null)
         {
-            Debug.Log("Triggering scene transition");
+            Debug.Log("Triggering scene transition directly");
             
-            // Try multiple ways to trigger the transition
-            // Method 1: Direct call if available
-            if (connectedTransition.GetType().GetMethod("TransitionToScene") != null)
-            {
-                connectedTransition.SendMessage("TransitionToScene", SendMessageOptions.DontRequireReceiver);
-            }
-            // Method 2: Use SendMessage with named parameter if needed
-            else if (connectedTransition.GetType().GetMethod("TransitionToScene", new System.Type[] { typeof(string) }) != null)
-            {
-                string sceneName = connectedTransition.GetType().GetField("targetSceneName")?.GetValue(connectedTransition) as string;
-                if (!string.IsNullOrEmpty(sceneName))
-                {
-                    connectedTransition.SendMessage("TransitionToScene", sceneName, SendMessageOptions.DontRequireReceiver);
-                }
-            }
-            // Method 3: Direct scene loading as fallback
-            else
-            {
-                string sceneName = connectedTransition.GetType().GetField("targetSceneName")?.GetValue(connectedTransition) as string;
-                if (!string.IsNullOrEmpty(sceneName))
-                {
-                    Debug.Log($"Loading scene directly: {sceneName}");
-                    UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
-                }
-                else
-                {
-                    Debug.LogError("Could not determine target scene name for transition");
-                }
-            }
+            // Use SendMessage as we do elsewhere in this class
+            connectedTransition.SendMessage("TransitionToScene", SendMessageOptions.DontRequireReceiver);
         }
         else
         {
