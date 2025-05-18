@@ -2,6 +2,8 @@
 
 A 2D top-down puzzle adventure game developed in Unity. Navigate through rooms, solve puzzles, and discover the secrets hidden throughout the environment. Key to success is balancing discovering the rooms on your own and asking the AI model for guidance.
 
+![Screenshot](screenshot.png)
+
 ## Game Overview
 
 In Escape Room 2025, players navigate through a series of interconnected rooms, solving puzzles by manipulating objects in the environment. The core gameplay revolves around finding and using carriable objects, activating mechanisms, and discovering the path forward.
