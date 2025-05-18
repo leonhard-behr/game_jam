@@ -72,8 +72,17 @@ def generate_request_signature(request_data):
     
     return timestamp, signature
 
+# track speaking status
+is_speaking = False
+last_spoke_time = 0
+
 def api_call(user_message):
     """Make API call with current chat history and update history with response"""
+    global is_speaking, last_spoke_time
+    
+    # Set speaking to true when request starts
+    is_speaking = True
+    
     # Load current chat history
     chat_history = load_chat_history()
     
@@ -128,8 +137,17 @@ def api_call(user_message):
         end = time.time()
         print("Time taken to get response:", end - start)
         
+        # Set speaking to false when request completes
+        is_speaking = False
+        last_spoke_time = int(time.time())
+        print(f"Set speaking state to: {is_speaking}, last_spoke: {last_spoke_time}")
+        
         return response_text
     except Exception as e:
+        # Set speaking to false on error too
+        is_speaking = False
+        last_spoke_time = int(time.time())
+        print(f"Error occurred, set speaking to false")
         print(f"Error making API call: {e}")
         return None
 
@@ -146,6 +164,16 @@ def query_endpoint():
     # Call your existing function
     response = api_call(user_message)
     return jsonify({"response": response})
+
+# Add this to your Flask app
+@app.route('/status', methods=['GET'])
+def status_endpoint():
+    """REST endpoint for checking if LLM is actively generating a response"""
+    global is_speaking, last_spoke_time
+    return jsonify({
+        "speaking": is_speaking,
+        "last_spoke": last_spoke_time
+    })
 
 def start_server():
     """Start Flask server on a separate thread"""

@@ -22,8 +22,8 @@ public class llm_integration : MonoBehaviour
     private string[] conversationBuffers = new string[] 
     {
         "mhhh", "mh...", "mhhh...", "uhm", "hmmm", "huh", "uhm...", "huh...", 
-        "mhhh?", "mh?", "hmmm?", "huh?", "uhm?", "ähhm", "ahhm", "ahhm...", "...", "...", "...", "...", "...", "...", "...", "...", "...",
-        "ähm...", "mhmm", "mhmm...", "mhmm?", "mhmmm", "mhmmm...", "mhmmm?", "...", "...", "...", "...", "...", "...", "...", "...", "...",
+        "mhhh?", "mh?", "hmmm?", "huh?", "uhm?", "ahm", "ahhm", "ahhm...", "...", "...", "...", "...", "...", "...", "...", "...", "...",
+        "ahm...", "mhmm", "mhmm...", "mhmm?", "mhmmm", "mhmmm...", "mhmmm?", "...", "...", "...", "...", "...", "...", "...", "...", "...",
         "hmmm", "hmmm...", "hmmm?", "hmmmm", "hmmmm...", "hmmmm?", "...", "...", "...", "...", "...", "...", "...", "...", "...",
     };
 
@@ -57,8 +57,11 @@ public class llm_integration : MonoBehaviour
         // Setup input field to submit on Enter key
         if (userInputField != null)
         {
+            // Add character validation to prevent special characters
+            userInputField.onValidateInput += ValidateCharacterInput;
             userInputField.onEndEdit.AddListener(OnEndEdit);
             LogMessage("Input field end edit listener configured");
+            LogMessage("Input field validation configured");
         }
         else
         {
@@ -97,6 +100,8 @@ public class llm_integration : MonoBehaviour
         }
             
         string userMessage = userInputField.text;
+        // Filter special characters from user message before sending
+        userMessage = FilterSpecialCharacters(userMessage);
         LogMessage($"Processing user message: {userMessage}");
         
         // Immediately show a random thinking message
@@ -151,7 +156,7 @@ public class llm_integration : MonoBehaviour
                         // Stop any previous display coroutines
                         StopAllCoroutines();
                         
-                        // Start displaying the response gradually
+                        // Start a new coroutine for this specific display
                         StartCoroutine(DisplayResponseGradually(responseData.response));
                     }
                     else
@@ -176,7 +181,6 @@ public class llm_integration : MonoBehaviour
         LogMessage("API call completed");
     }
     
-    // Add this method to your llm_integration class
     private IEnumerator DisplayResponseGradually(string fullResponse, float wordDelay = 0.1f)
     {
         if (responseText == null)
@@ -184,8 +188,9 @@ public class llm_integration : MonoBehaviour
             LogMessage("Cannot display response gradually - responseText is null", LogType.Warning);
             yield break;
         }
-
-        //fullResponse = System.Text.RegularExpressions.Regex.Replace(fullResponse, @"[&%$§()/\*<>#@{}\[\]^°=+~|;:\.,-_]", "");
+        
+        // Filter special characters from the response
+        fullResponse = FilterSpecialCharacters(fullResponse);
         
         // Split response into words
         string[] words = fullResponse.Split(' ');
@@ -203,6 +208,7 @@ public class llm_integration : MonoBehaviour
         }
         
         LogMessage("Completed displaying response gradually");
+    
     }
     
     // Logging functions
@@ -242,6 +248,55 @@ public class llm_integration : MonoBehaviour
     {
         int randomIndex = UnityEngine.Random.Range(0, conversationBuffers.Length);
         return conversationBuffers[randomIndex];
+    }
+    
+    // Filter unwanted characters
+    private string FilterSpecialCharacters(string text)
+    {
+        if (string.IsNullOrEmpty(text))
+            return text;
+            
+        // Define characters to remove
+        char[] charsToRemove = new char[] { 
+            '&', '%', '$', '§', '(', ')', '/', '\\', '*', 
+            '<', '>', '#', '@', '{', '}', '[', ']', '^', 
+            '°', '=', '+', '~', '|', '-', '_' 
+        };
+        
+        // Replace unwanted characters with empty string
+        string result = text;
+        foreach (char c in charsToRemove)
+        {
+            result = result.Replace(c.ToString(), "");
+        }
+        
+        return result;
+    }
+    
+    // Character validation callback for input field
+    private char ValidateCharacterInput(string text, int charIndex, char addedChar)
+    {
+        // Define characters to block
+        char[] disallowedChars = new char[] { 
+            '&', '%', '$', '§', '(', ')', '/', '\\', '*', 
+            '<', '>', '#', '@', '{', '}', '[', ']', '^', 
+            '°', '=', '+', '~', '|', '-', '_', 
+            'ä', 'ö', 'ü', 'Ä', 'Ö', 'Ü', 'ß',
+            '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'
+        };
+        
+        // Check if the character is in the disallowed list
+        foreach (char c in disallowedChars)
+        {
+            if (addedChar == c)
+            {
+                // Return '\0' (null character) to reject this input
+                return '\0';
+            }
+        }
+        
+        // Character is allowed, so return it unchanged
+        return addedChar;
     }
     
     // Classes for JSON serialization

@@ -1,8 +1,9 @@
 ITEMS = """
 
-Bookshelf (tip): The third book from the left in the top row is the diary of a former prisoner. You might find something interesting in it.
-Desk (tip): The drawer on the left side of the desk is locked. You might need a key to open it.
-Small hold in the wall (instruction): place a heavy object in the hole to open the door.
+Bookshelf (tip): In the second shelf from the right is a red book, thats where they kept the transfer files. To remember the code they often chose codes associated with the subjects. 
+Only after the Book is found -> Subject KLEN.D (info): Tell a story about the subject KLEN.D and how he was transferred from wing C with no restraints. He complied silently but continued humming an unidentifiable melody. No signs of sedation. After telling the story and after the user talked a little give the information that the subjects was transferred to room 4211.
+
+
 
 """
 ANSWER = ""

@@ -7,15 +7,55 @@
     },
     {
       "role": "assistant",
-      "content": "Hey. What's on your mind?"
+      "content": "Hey... what's up?"
     },
     {
       "role": "user",
-      "content": "There is something in the bookshelf what is it?"
+      "content": "who is there?"
     },
     {
       "role": "assistant",
-      "content": "Just a bunch of old books, nothing too interesting. You might find something if you check out the third one from the left though..."
+      "content": "Just someone trying to pass the time. You know how it is."
+    },
+    {
+      "role": "user",
+      "content": "hey there!"
+    },
+    {
+      "role": "assistant",
+      "content": "Hey..."
+    },
+    {
+      "role": "user",
+      "content": "Hey there! Where am i?"
+    },
+    {
+      "role": "assistant",
+      "content": "Cellblock. Don't worry about it too much, just focus on finding a way out."
+    },
+    {
+      "role": "user",
+      "content": "Hey there!"
+    },
+    {
+      "role": "assistant",
+      "content": "Hey... what's your situation like in here?"
+    },
+    {
+      "role": "user",
+      "content": "i am stuck! Stepbro"
+    },
+    {
+      "role": "assistant",
+      "content": "Yeah, I feel you. You're not alone."
+    },
+    {
+      "role": "user",
+      "content": "who is obkjjasdjflajsdfj"
+    },
+    {
+      "role": "assistant",
+      "content": "I'm just someone else stuck here. Try to focus on finding a way out."
     }
   ]
 }
