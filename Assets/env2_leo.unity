@@ -853,7 +853,7 @@ Transform:
   m_GameObject: {fileID: 229611065}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 78.8, y: -35.9, z: 4.58}
+  m_LocalPosition: {x: 77.6, y: -7.4, z: 4.58}
   m_LocalScale: {x: 0.58095443, y: 0.58095443, z: 0.58095443}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -923,6 +923,7 @@ GameObject:
   - component: {fileID: 308385186}
   - component: {fileID: 308385185}
   - component: {fileID: 308385188}
+  - component: {fileID: 308385189}
   m_Layer: 0
   m_Name: Table_left
   m_TagString: Untagged
@@ -1065,6 +1066,19 @@ MonoBehaviour:
   acceptedObjectTypes: []
   placementSound: {fileID: 0}
   removingSound: {fileID: 0}
+--- !u!114 &308385189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 308385184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f38af12b5b872f6439432aee1de45fc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  expectedChar: 50
 --- !u!1 &399987980
 GameObject:
   m_ObjectHideFlags: 0
@@ -1077,6 +1091,7 @@ GameObject:
   - component: {fileID: 399987982}
   - component: {fileID: 399987981}
   - component: {fileID: 399987984}
+  - component: {fileID: 399987985}
   m_Layer: 0
   m_Name: Table_farright
   m_TagString: Untagged
@@ -1219,6 +1234,19 @@ MonoBehaviour:
   acceptedObjectTypes: []
   placementSound: {fileID: 0}
   removingSound: {fileID: 0}
+--- !u!114 &399987985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 399987980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2708ed5de3bf13247a92292481a47a62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  expectedChar: 53
 --- !u!1 &448690328
 GameObject:
   m_ObjectHideFlags: 0
@@ -1624,6 +1652,7 @@ GameObject:
   - component: {fileID: 612503676}
   - component: {fileID: 612503675}
   - component: {fileID: 612503678}
+  - component: {fileID: 612503679}
   m_Layer: 0
   m_Name: Table_right
   m_TagString: Untagged
@@ -1766,6 +1795,19 @@ MonoBehaviour:
   acceptedObjectTypes: []
   placementSound: {fileID: 0}
   removingSound: {fileID: 0}
+--- !u!114 &612503679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 612503674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61f4168c987c297478505dc36e17043b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  expectedChar: 52
 --- !u!1 &635417161
 GameObject:
   m_ObjectHideFlags: 0
@@ -1974,8 +2016,12 @@ GameObject:
   m_Component:
   - component: {fileID: 657724763}
   - component: {fileID: 657724762}
-  - component: {fileID: 657724765}
   - component: {fileID: 657724764}
+  - component: {fileID: 657724766}
+  - component: {fileID: 657724768}
+  - component: {fileID: 657724767}
+  - component: {fileID: 657724770}
+  - component: {fileID: 657724769}
   m_Layer: 0
   m_Name: Door_0
   m_TagString: Untagged
@@ -2069,7 +2115,23 @@ MonoBehaviour:
   spawnPointName: env3
   requiresInteraction: 0
   transitionPrompt: Press E to enter
---- !u!61 &657724765
+--- !u!114 &657724766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 657724761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68b244c2540bed548bbf171f996484d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorBlocker: {fileID: 0}
+  checkInterval: 0.5
+  showDebugMessages: 1
+  promptMessage: All tables need correct objects to unlock the door
+--- !u!61 &657724767
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2099,11 +2161,11 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -1}
+  m_Offset: {x: 0.0913012, y: -1.3832392}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -2113,7 +2175,88 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.64, y: 1.89}
+  m_Size: {x: 2.4690914, y: 1.7594898}
+  m_EdgeRadius: 0
+--- !u!114 &657724768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 657724761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1488b91bb071b8441a028b3514b93fbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorBlocker: {fileID: 657724767}
+  promptMessage: All tables need correct objects to unlock the door
+  unlockedMessage: Door unlocked!
+  checkInterval: 0.5
+  showDebugMessages: 1
+  unlockSound: {fileID: 0}
+  connectedTransition: {fileID: 0}
+--- !u!114 &657724769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 657724761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65b22f3106aa1fe46a73c3cb64b1d11d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetSceneName: evn3
+  spawnPointName: SpawnPoint
+  requiresInteraction: 1
+  transitionPrompt: Press E to enter
+--- !u!61 &657724770
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 657724761}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: -1.277173}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.64, y: 1.89}
+    newSize: {x: 1.64, y: 1.89}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1.64, y: 1.285879}
   m_EdgeRadius: 0
 --- !u!1 &702089542
 GameObject:
@@ -2568,6 +2711,7 @@ GameObject:
   - component: {fileID: 948208358}
   - component: {fileID: 948208357}
   - component: {fileID: 948208360}
+  - component: {fileID: 948208361}
   m_Layer: 0
   m_Name: Table_middle
   m_TagString: Untagged
@@ -2710,6 +2854,19 @@ MonoBehaviour:
   acceptedObjectTypes: []
   placementSound: {fileID: 0}
   removingSound: {fileID: 0}
+--- !u!114 &948208361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 948208356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 591343d6348f07042b9fc8552c383a5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  expectedChar: 51
 --- !u!1 &952803587
 GameObject:
   m_ObjectHideFlags: 0
@@ -2885,6 +3042,7 @@ GameObject:
   - component: {fileID: 1060359640}
   - component: {fileID: 1060359639}
   - component: {fileID: 1060359638}
+  - component: {fileID: 1060359642}
   m_Layer: 0
   m_Name: Table_farleft
   m_TagString: Untagged
@@ -3027,6 +3185,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1060359642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1060359637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 615909a59457f1f4584639f4e8897372, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  expectedChar: 49
 --- !u!1 &1094884161
 GameObject:
   m_ObjectHideFlags: 0
