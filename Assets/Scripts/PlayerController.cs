@@ -67,6 +67,18 @@ public class PlayerController : MonoBehaviour
     
     private void Update()
     {
+        // Check for input field focus - ADD THIS AT THE TOP OF UPDATE
+        bool isAnyInputFieldFocused = FindObjectsByType<TMPro.TMP_InputField>(FindObjectsSortMode.None)
+            .Any(field => field.isFocused);
+        
+        if (isAnyInputFieldFocused)
+        {
+            // Don't process movement when input field is focused
+            StopWalkingAnimation();
+            rb.linearVelocity = Vector2.zero;
+            return;
+        }
+        
         // Direct key checking
         bool upKeyPressed = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
         bool downKeyPressed = Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
@@ -196,16 +208,20 @@ public class PlayerController : MonoBehaviour
         }
     }
     
+    // Enhanced FixedUpdate to handle input field focus
+    private bool IsInputFieldFocused()
+    {
+        // More efficient to cache this result between Update and FixedUpdate
+        return FindObjectsByType<TMPro.TMP_InputField>(FindObjectsSortMode.None)
+            .Any(field => field.isFocused);
+    }
+
     private void FixedUpdate()
     {
         // Check for input field focus
-        bool isAnyInputFieldFocused = FindObjectsByType<TMPro.TMP_InputField>(FindObjectsSortMode.None)
-            .Any(field => field.isFocused);
-        
-        if (isAnyInputFieldFocused)
+        if (IsInputFieldFocused())
         {
             rb.linearVelocity = Vector2.zero;
-            StopWalkingAnimation();
             return;
         }
         

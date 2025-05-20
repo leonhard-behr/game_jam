@@ -1,4 +1,4 @@
-"""runs on local device"""
+'"""runs on local device"""
 import requests
 import time
 import json
@@ -18,14 +18,14 @@ API_KEY_PATH = os.path.join(os.path.dirname(__file__), "client_key.key")
 if not os.path.exists(API_KEY_PATH):
     print("API key file not found. Please get the key from the server.")
     API_KEY = input("Enter API key: ")
-    with open(API_KEY_PATH, 'w') as key_file:
+    with open(API_KEY_PATH, \'w\') as key_file:
         key_file.write(API_KEY)
 else:
-    with open(API_KEY_PATH, 'r') as key_file:
+    with open(API_KEY_PATH, \'r\') as key_file:
         API_KEY = key_file.read().strip()
 
 def init_chat_history():
-    """Initialize chat history file if it doesn't exist"""
+    """Initialize chat history file if it doesn\'t exist"""
     if not os.path.exists(CHAT_HISTORY_FILE):
         chat_history = {
             "system_prompt": SYSTEM_PROMPT,
@@ -34,7 +34,7 @@ def init_chat_history():
         save_chat_history(chat_history)
     else:
         # clearing chat history for new session
-        with open(CHAT_HISTORY_FILE, 'w') as f:
+        with open(CHAT_HISTORY_FILE, \'w\') as f:
             chat_history = {
                 "system_prompt": SYSTEM_PROMPT,
                 "history": []
@@ -45,13 +45,13 @@ def init_chat_history():
 def load_chat_history():
     """Load chat history from JSON file"""
     if os.path.exists(CHAT_HISTORY_FILE):
-        with open(CHAT_HISTORY_FILE, 'r') as f:
+        with open(CHAT_HISTORY_FILE, \'r\') as f:
             return json.load(f)
     return init_chat_history()
 
 def save_chat_history(chat_history):
     """Save chat history to JSON file"""
-    with open(CHAT_HISTORY_FILE, 'w') as f:
+    with open(CHAT_HISTORY_FILE, \'w\') as f:
         json.dump(chat_history, f, indent=2)
 
 def generate_request_signature(request_data):
@@ -60,12 +60,12 @@ def generate_request_signature(request_data):
     timestamp = str(int(time.time()))
     
     # Convert request data to bytes for hashing
-    data = str(request_data).encode('utf-8')
-    message = data + timestamp.encode('utf-8')
+    data = str(request_data).encode(\'utf-8\')
+    message = data + timestamp.encode(\'utf-8\')
     
     # Create signature
     signature = hmac.new(
-        API_KEY.encode('utf-8'), 
+        API_KEY.encode(\'utf-8\'), 
         message, 
         hashlib.sha256
     ).hexdigest()
@@ -94,9 +94,11 @@ def api_call(user_message):
     prompt = chat_history["system_prompt"]
     for msg in chat_history["history"]:
         if msg["role"] == "user":
-            prompt += f"\nUser: {msg['content']}"
+            prompt += f"\
+User: {msg[\'content\']}"
         else:
-            prompt += f"\nAssistant: {msg['content']}"
+            prompt += f"\
+Assistant: {msg[\'content\']}"
     
     # Prepare request data
     request_data = {
@@ -115,8 +117,8 @@ def api_call(user_message):
             f"http://{TAILSCALE_IP}:5000/ask", 
             json=request_data,
             headers={
-                'X-Auth-Timestamp': timestamp,
-                'X-Auth-Signature': signature
+                \'X-Auth-Timestamp\': timestamp,
+                \'X-Auth-Signature\': signature
             }
         )
         
@@ -153,11 +155,11 @@ def api_call(user_message):
 
 app = Flask(__name__)
 
-@app.route('/query', methods=['POST'])
+@app.route(\'/query\', methods=[\'POST\'])
 def query_endpoint():
     """REST endpoint for Unity to call"""
     data = request.json
-    user_message = data.get('message', '')
+    user_message = data.get(\'message\', \'\')
     if not user_message:
         return jsonify({"error": "No message provided"}), 400
     
@@ -166,7 +168,7 @@ def query_endpoint():
     return jsonify({"response": response})
 
 # Add this to your Flask app
-@app.route('/status', methods=['GET'])
+@app.route(\'/status\', methods=[\'GET\'])
 def status_endpoint():
     """REST endpoint for checking if LLM is actively generating a response"""
     global is_speaking, last_spoke_time
@@ -177,7 +179,7 @@ def status_endpoint():
 
 def start_server():
     """Start Flask server on a separate thread"""
-    app.run(host='127.0.0.1', port=5001, debug=False)
+    app.run(host=\'127.0.0.1\', port=5001, debug=False)
 
 if __name__ == "__main__":
     # Initialize chat history
@@ -191,15 +193,17 @@ if __name__ == "__main__":
 
     # Interactive chat mode (keep this as an option)
     def chat_loop():
-        print("Chat mode started. Type 'exit' to quit.")
+        print("Chat mode started. Type \'exit\' to quit.")
         while True:
-            user_input = input("\nYou: ")
+            user_input = input("\
+You: ")
             if user_input.lower() == "exit":
                 break
             
             response_text = api_call(user_input)
             if response_text:
-                print("\nAssistant:", response_text)
+                print("\
+Assistant:", response_text)
 
     # Run interactive chat mode
-    chat_loop()
+    chat_loop()'
